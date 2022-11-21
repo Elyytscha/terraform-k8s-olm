@@ -19,6 +19,7 @@ resource "null_resource" "deploy_operator_lifecycle_manager" {
 
   provisioner "local-exec" {
     command = "${path.module}/scripts/deploy-olm.sh ${self.triggers.OLM_VERSION}"
+    interpreter = ["bash"]
 
     environment = {
       KUBECONFIG      = self.triggers.KUBECONFIG
@@ -31,6 +32,7 @@ resource "null_resource" "deploy_operator_lifecycle_manager" {
   provisioner "local-exec" {
     when    = destroy
     command = "${path.module}/scripts/destroy-olm.sh"
+    interpreter = ["bash"]
 
     environment = {
       KUBECONFIG      = self.triggers.KUBECONFIG
