@@ -12,8 +12,8 @@ if [[ "${CLUSTER_TYPE}" == "ocp4" ]]; then
   exit 0
 fi
 
-kubectl delete deployment -n olm --all
-kubectl delete namespace olm --wait=false
+kubectl --kubeconfig ~/.kube/config delete deployment -n olm --all
+kubectl --kubeconfig ~/.kube/config delete namespace olm --wait=false
 "${SCRIPT_DIR}/kill-kube-ns" olm
-kubectl delete namespace olm
+kubectl --kubeconfig ~/.kube/config delete namespace olm
 exit 0
